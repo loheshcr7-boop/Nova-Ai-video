@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Video Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+
+    textarea {
+      width: 80%;
+      max-width: 600px;
+      height: 120px;
+      padding: 15px;
+      font-size: 16px;
+      border-radius: 10px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #status {
+      margin: 20px;
+    }
+
+    video {
+      width: 80%;
+      max-width: 700px;
+      margin-top: 20px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🎬 AI Video Generator</h1>
+
+  <textarea id="prompt"
+    placeholder="Describe the video you want..."></textarea>
+
+  <br>
+
+  <button onclick="generateVideo()">Generate Video</button>
+
+  <p id="status"></p>
+
+  <video id="video" controls hidden></video>
+
+  <script>
+    async function generateVideo() {
+
+      const prompt = document.getElementById("prompt").value;
+      const status = document.getElementById("status");
+      const video = document.getElementById("video");
+
+      if (!prompt) {
+        alert("Please enter a video prompt!");
+        return;
+      }
+
+      status.innerText = "Generating video... ⏳";
+
+      try {
+
+        // Connect your AI video API here
+        const response = await fetch("/api/generate-video", {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            prompt: prompt
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.video_url) {
+
+          video.src = data.video_url;
+          video.hidden = false;
+
+          status.innerText = "Video generated
