@@ -10,10 +10,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => { res.sendFile(process . cwd() + "/index .html"); });
-  rjson({
-    status: "NOVA AI VIDEO server is running"
-  });
+app.get("/", (req, res) => {
+  res.sendFile(process.cwd() + "/index.html");
 });
 
 app.post("/api/generate-video", async (req, res) => {
@@ -27,7 +25,7 @@ app.post("/api/generate-video", async (req, res) => {
 
   console.log("Video prompt:", prompt);
 
-  return res.json({
+  res.json({
     status: "received",
     message: "Prompt received successfully",
     prompt: prompt
