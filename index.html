@@ -85,4 +85,43 @@
       try {
 
         const response = await fetch(
-          "https://nova-ai-video
+          "https://nova-ai-video.onrender.com/api/generate-video",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+              prompt: prompt
+            })
+          }
+        );
+
+        const data = await response.json();
+
+        if (data.status === "received") {
+
+          status.innerText =
+            "Prompt received successfully! ✅";
+
+        } else {
+
+          status.innerText =
+            "Server error ❌";
+
+        }
+
+      } catch (error) {
+
+        console.error(error);
+
+        status.innerText =
+          "Could not connect to server ❌";
+      }
+    }
+  </script>
+
+</body>
+</html>
