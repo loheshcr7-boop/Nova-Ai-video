@@ -1,7 +1,8 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <title>AI Video Generator</title>
+  <title>NOVA AI VIDEO</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -18,6 +19,7 @@ DOCTYPE html>
       padding: 15px;
       font-size: 16px;
       border-radius: 10px;
+      box-sizing: border-box;
     }
 
     button {
@@ -44,14 +46,17 @@ DOCTYPE html>
 
 <body>
 
-  <h1>🎬 AI Video Generator</h1>
+  <h1>🎬 NOVA AI VIDEO</h1>
 
-  <textarea id="prompt"
+  <textarea
+    id="prompt"
     placeholder="Describe the video you want..."></textarea>
 
   <br>
 
-  <button onclick="generateVideo()">Generate Video</button>
+  <button onclick="generateVideo()">
+    Generate Video
+  </button>
 
   <p id="status"></p>
 
@@ -60,37 +65,24 @@ DOCTYPE html>
   <script>
     async function generateVideo() {
 
-      const prompt = document.getElementById("prompt").value;
-      const status = document.getElementById("status");
-      const video = document.getElementById("video");
+      const prompt =
+        document.getElementById("prompt").value.trim();
+
+      const status =
+        document.getElementById("status");
+
+      const video =
+        document.getElementById("video");
 
       if (!prompt) {
         alert("Please enter a video prompt!");
         return;
       }
 
-      status.innerText = "Generating video... ⏳";
+      status.innerText =
+        "Connecting to NOVA server... ⏳";
 
       try {
 
-        // Connect your AI video API here
-        const response = await fetch(https://nova-ai-video.onrender.com/api/generate-video, {
-          method: "POST",
-
-          headers: {
-            "Content-Type": "application/json"
-          },
-
-          body: JSON.stringify({
-            prompt: prompt
-          })
-        });
-
-        const data = await response.json();
-
-        if (data.video_url) {
-
-          video.src = data.video_url;
-          video.hidden = false;
-
-          status.innerText = "Video generated
+        const response = await fetch(
+          "https://nova-ai-video
